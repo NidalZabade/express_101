@@ -1,6 +1,4 @@
 const bcrypt = require("bcrypt");
-const emails = require("../utils/emails.json");
-const fs = require("fs");
 const saltRounds = 10;
 
 
