@@ -12,3 +12,4 @@ const validateSchema = (schema) => {
 };
 
 module.exports = validateSchema;
+
