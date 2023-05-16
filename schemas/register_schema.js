@@ -1,6 +1,6 @@
 const joi = require("joi");
 
-const schema = joi.object({
+const registerSchema = joi.object({
   email: joi
     .string()
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
@@ -12,4 +12,4 @@ const schema = joi.object({
   repeat_password: joi.ref("password"),
 });
 
-module.exports = schema;
+module.exports = registerSchema;

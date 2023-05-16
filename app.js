@@ -9,9 +9,6 @@ const indexRouter = require("./routes/index.js");
 const usersRouter = require("./routes/users.js");
 const registerRouter = require("./routes/register.js");
 
-const pageMiddleware = require("./middleware/pages_middleware.js");
-const registration = require("./middleware/user_middleware.js");
-
 const app = express();
 
 // view engine setup
@@ -25,10 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-
-
-app.use("/users", pageMiddleware, usersRouter);
-app.use("/register", registration, registerRouter);
+app.use("/users", usersRouter);
+app.use("/register", registerRouter);
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
