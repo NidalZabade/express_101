@@ -1,5 +1,5 @@
 const { comparePassword } = require("../utils/hashed_password.js");
-const emails = require("../utils/emails.json");
+const emails = require("../data/emails.json");
 
 const authenticationMiddleware = async (req, res, next) => {
   const { email, password } = req.body;
