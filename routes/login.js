@@ -1,14 +1,17 @@
 const express = require("express");
-const { get } = require("../utils/api.js");
-const authenticationMiddleware = require("../middleware/authentication_middleware.js");
+const { post } = require("../utils/api.js");
+const isValidEmail = require("../schema/email_validation.js");
+const { generateToken } = require("../utils/token.js");
 
 const router = express.Router();
 
-
-router.post("/", authenticationMiddleware, async (req, res) => {
-    res.status(200).send("Login successful");
+router.post("/", async (req, res) => {
+  if (await isValidEmail(req.body.email, req.body.password)) {
+    const token = generateToken({ email: req.body.email });
+    res.status(200).send({ token });
+  } else {
+    res.status(401).send("Invalid email or password");
+  }
 });
 
-
-
-module.exports=router;
+module.exports = router;

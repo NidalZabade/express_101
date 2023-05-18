@@ -2,6 +2,7 @@
   "emails": [
     {
       "email": "nidal@asal.com",
+      "roles": ["admin"],
       "hashed_password": "$2b$10$NFtpSD.dgQvnv8LNahZUVecj30K/ixi08GUrhkHOrFQnSK/yY/nJS"
     },
     {

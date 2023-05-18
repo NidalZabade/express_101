@@ -1,20 +1,18 @@
-const { comparePassword } = require("../utils/hashed_password.js");
-const emails = require("../data/emails.json");
+const { verifyToken } = require("../utils/token.js");
 
 const authenticationMiddleware = async (req, res, next) => {
-  const { email, password } = req.body;
-  const user = emails.emails.find((user) => user.email === email);
-  if (!user) {
-    return res.status(401).send("Invalid email");
+  const token = req.headers.authorization;
+  try {
+
+  if (!token) {
+    throw new Error("No token provided");
   }
-  const isPasswordCorrect = await comparePassword(
-    password,
-    user.hashed_password
-  );
-  if (!isPasswordCorrect) {
-    return res.status(401).send("Invalid password");
+    const payload = await verifyToken(token);
+    req.user = payload;
+    next();
+  } catch (err) {
+    res.status(401).send("Unauthorized");
   }
-  next();
 };
 
 module.exports = authenticationMiddleware;
